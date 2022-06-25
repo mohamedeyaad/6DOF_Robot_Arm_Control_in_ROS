@@ -1,0 +1,5 @@
+<?xml version="1.0" ?>
+<launch>
+  <node name="pub" pkg="six_dof_arm_test" type="publisher.py" output="screen"/>
+  <node name="sub" pkg="six_dof_arm_test" type="subscriber.py" output="screen"/>
+</launch>
