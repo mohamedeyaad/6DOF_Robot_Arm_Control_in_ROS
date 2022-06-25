@@ -1,0 +1,13 @@
+controller_list:
+  - name: /six_dof_arm/position_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: True
+    joints:
+      - shoulder_roll_joint
+      - shoulder_pitch_joint
+      - elbow_roll_joint
+      - elbow_pitch_joint
+      - wrist_roll_joint
+      - wrist_pitch_joint
+      - gripper_roll_joint
