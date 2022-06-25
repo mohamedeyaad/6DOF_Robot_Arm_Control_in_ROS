@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+
+<launch>
+	<arg name="model" />
+	<!-- Parsing URDF and setting robot_description parameter -->
+
+	<param name="robot_description" textfile="$(find robot_description)/urdf/six_dof_arm.urdf" />
+
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+	<node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
+
+	<!-- Launch visualization in rviz -->
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot_description)/urdf.rviz" required="true" />
+	
+</launch>

@@ -1,0 +1,433 @@
+<?xml version="1.0"?>
+<!-- =================================================================================== -->
+<!-- |    This document was made by:
+   		-Mohammed Ashraf Saeed 
+	   	-uohamed Eyad Sayed 
+		-Mohamed Alaa El-Din       | -->
+<!-- =================================================================================== -->
+<robot name="six_dof_arm">
+    <!-- ////////////////////////////////////////////////////////////////////////////// -->
+    <!-- WORLD -->
+    <link name="world">
+        <visual>
+            <origin rpy="0 0 0" xyz=" 0 0 0" />
+            <geometry>
+                <box size="1 1 0.02" />
+            </geometry>
+            <material name="Black">
+                <color rgba="0.0 0.0 0.0 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz=" 0 0 0" />
+            <geometry>
+                <box size="1 1 0.02" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.1" />
+            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+    </link>
+    <joint name="world_joint" type="fixed">
+        <origin rpy="0 0 0" xyz="0 0 0.06" />
+        <child link="base_link" />
+        <parent link="world" />
+    </joint>
+    <gazebo reference="world">
+        <material>Gazebo/Black</material>
+    </gazebo>
+    <!-- ////////////////////////////////////////////////////////////////////////////// -->
+    <!-- BASE LINK -->
+    <link name="base_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <geometry>
+                <box size="0.2 0.2 0.1" />
+            </geometry>
+            <material name="Red">
+                <color rgba="1.0 0.0 0.0 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <geometry>
+                <box size="0.2 0.2 0.1" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1" />
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="0.5" iyz="0.0" izz="1.0" />
+        </inertial>
+    </link>
+    <joint name="shoulder_roll_joint" type="revolute">
+        <parent link="base_link" />
+        <child link="shoulder_roll_link" />
+        <origin rpy="0 0 0.0" xyz="0 0 0.07" />
+        <axis xyz="0 0 1" />
+        <limit effort="300" lower="-3.14" upper="3.14" velocity="1" />
+        <dynamics damping="50" friction="1" />
+    </joint>
+    <gazebo reference="base_link">
+        <material>Gazebo/Red</material>
+    </gazebo>
+    <!-- ////////////////////////////////////////////////////////////////////////////// -->
+    <!-- SHOULDER ROLL LINK -->
+    <link name="shoulder_roll_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <geometry>
+                <cylinder length="0.04" radius="0.04" />
+            </geometry>
+            <material name="Green">
+                <color rgba="0.0 1.0 0.0 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <geometry>
+                <cylinder length="0.04" radius="0.04" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1" />
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="0.5" iyz="0.0" izz="1.0" />
+        </inertial>
+    </link>
+    <joint name="shoulder_pitch_joint" type="revolute">
+        <parent link="shoulder_roll_link" />
+        <child link="shoulder_pitch_link" />
+        <origin rpy="0 0 0" xyz="0.0 0.0 0.02" />
+        <axis xyz="1 0 0" />
+        <limit effort="300" lower="-3.14" upper="3.14" velocity="1" />
+        <dynamics damping="50" friction="1" />
+    </joint>
+    <gazebo reference="shoulder_roll_link">
+        <material>Gazebo/Green</material>
+    </gazebo>
+    <!-- ////////////////////////////////////////////////////////////////////////////// -->
+    <!-- SHOULDER PITCH LINK -->
+    <link name="shoulder_pitch_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0.0 0.0 0.07" />
+            <geometry>
+                <box size="0.04 0.04 0.14" />
+            </geometry>
+            <material name="Red">
+                <color rgba="1.0 0.0 0.0 0.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0.0 0.0 0.07" />
+            <geometry>
+                <box size="0.04 0.04 0.14" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1" />
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="0.5" iyz="0.0" izz="1.0" />
+        </inertial>
+    </link>
+    <joint name="elbow_roll_joint" type="revolute">
+        <parent link="shoulder_pitch_link" />
+        <child link="elbow_roll_link" />
+        <origin rpy="0 0 0" xyz="0.0 0 0.17" />
+        <axis xyz="0 0 1" />
+        <limit effort="300" lower="-3.14" upper="3.14" velocity="1" />
+        <dynamics damping="50" friction="1" />
+    </joint>
+    <gazebo reference="shoulder_pitch_link">
+        <material>Gazebo/Red</material>
+    </gazebo>
+    <!-- ////////////////////////////////////////////////////////////////////////////// -->
+    <!-- ELBOW ROLL LINK -->
+    <link name="elbow_roll_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0.0 0.0 0.0" />
+            <geometry>
+                <cylinder length="0.06" radius="0.02" />
+            </geometry>
+            <material name="Green">
+                <color rgba="0.0 1.0 0.0 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0.0 0.0 0.0" />
+            <geometry>
+                <cylinder length="0.06" radius="0.02" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1" />
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="0.5" iyz="0.0" izz="1.0" />
+        </inertial>
+    </link>
+    <joint name="elbow_pitch_joint" type="revolute">
+        <parent link="elbow_roll_link" />
+        <child link="elbow_pitch_link" />
+        <origin rpy="0 0 0" xyz="0.0 0 0.03" />
+        <axis xyz="1 0 0" />
+        <limit effort="300" lower="-3.14" upper="3.14" velocity="1" />
+        <dynamics damping="50" friction="1" />
+    </joint>
+    <gazebo reference="elbow_roll_link">
+        <material>Gazebo/Green</material>
+    </gazebo>
+    <!-- ////////////////////////////////////////////////////////////////////////////// -->
+    <!-- ELBOW PITCH LINK -->
+    <link name="elbow_pitch_link">
+        <visual>
+            <origin rpy="0.0 0 0.0" xyz="0 0 0.11" />
+            <geometry>
+                <box size="0.04 0.04 0.22" />
+            </geometry>
+            <material name="Red">
+                <color rgba="1.0 0.0 0.0 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin rpy="0.0 0 0.0" xyz="0 0 0.11" />
+            <geometry>
+                <box size="0.04 0.04 0.22" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1" />
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="0.5" iyz="0.0" izz="1.0" />
+        </inertial>
+    </link>
+    <joint name="wrist_roll_joint" type="revolute">
+        <parent link="elbow_pitch_link" />
+        <child link="wrist_roll_link" />
+        <origin rpy="0 0 0" xyz="0.0 0 0.25" />
+        <axis xyz="0 0 1" />
+        <limit effort="300" lower="-3.14" upper="3.14" velocity="1" />
+        <dynamics damping="50" friction="1" />
+    </joint>
+    <gazebo reference="elbow_pitch_link">
+        <material>Gazebo/Red</material>
+    </gazebo>
+    <!-- ////////////////////////////////////////////////////////////////////////////// -->
+    <!-- WRIST ROLL LINK -->
+    <link name="wrist_roll_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <geometry>
+                <cylinder length="0.06" radius="0.02" />
+            </geometry>
+            <material name="Green">
+                <color rgba="0.0 1.0 0.0 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <geometry>
+                <cylinder length="0.06" radius="0.02" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1" />
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="0.5" iyz="0.0" izz="1.0" />
+        </inertial>
+    </link>
+    <joint name="wrist_pitch_joint" type="revolute">
+        <parent link="wrist_roll_link" />
+        <child link="wrist_pitch_link" />
+        <origin rpy="0 0 0" xyz="0.0 0.0 0.03" />
+        <axis xyz="1 0 0" />
+        <limit effort="300" lower="-3.14" upper="3.14" velocity="1" />
+        <dynamics damping="50" friction="1" />
+    </joint>
+    <gazebo reference="wrist_roll_link">
+        <material>Gazebo/Green</material>
+    </gazebo>
+    <!-- ////////////////////////////////////////////////////////////////////////////// -->
+    <!-- WRIST PITCH LINK -->
+    <link name="wrist_pitch_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0.03" />
+            <geometry>
+                <box size="0.04 0.04 0.06" />
+            </geometry>
+            <material name="Red">
+                <color rgba="1.0 0.0 0.0 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0.03" />
+            <geometry>
+                <box size="0.04 0.04 0.06" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1" />
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="0.5" iyz="0.0" izz="1.0" />
+        </inertial>
+
+    </link>
+    <joint name="gripper_joint" type="fixed">
+        <parent link="wrist_pitch_link" />
+        <child link="gripper_link" />
+        <origin rpy="0 0 0" xyz="0 0 0.07" />
+    </joint>
+    <gazebo reference="wrist_pitch_link">
+        <material>Gazebo/Red</material>
+    </gazebo>
+    <!-- ////////////////////////////////////////////////////////////////////////////// -->
+    <!-- GRIPPER LINK -->
+    <link name="gripper_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <geometry>
+                <cylinder length="0.02" radius="0.04" />
+            </geometry>
+            <material name="Blue">
+                <color rgba="0.0 0.0 1.0 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <geometry>
+                <cylinder length="0.02" radius="0.04" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1" />
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="0.5" iyz="0.0" izz="1.0" />
+        </inertial>
+    </link>
+    <joint name="finger_joint1" type="fixed">
+        <parent link="gripper_link" />
+        <child link="gripper_finger_link1" />
+        <origin xyz="0.0 0.02 0.03" />
+    </joint>
+    <gazebo reference="gripper_link">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+    <!-- ////////////////////////////////////////////////////////////////////////////// -->
+    <!-- LEFT GRIPPER AFTER LINK -->
+    <link name="gripper_finger_link1">
+        <visual>
+            <origin rpy="0 1.570795 0" xyz="0 0 0" />
+            <geometry>
+                <box size="0.08 0.01 0.01" />
+            </geometry>
+            <material name="Red">
+                <color rgba="1.0 0.0 0.0 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin rpy="0 1.570795 0" xyz="0 0 0" />
+            <geometry>
+                <box size="0.08 0.01 0.01" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1" />
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="0.5" iyz="0.0" izz="1.0" />
+        </inertial>
+    </link>
+    <joint name="finger_joint2" type="fixed">
+        <parent link="gripper_link" />
+        <child link="gripper_finger_link2" />
+        <origin xyz="0.0 -0.02 0.03" />
+    </joint>
+    <gazebo reference="gripper_finger_link1">
+        <material>Gazebo/Red</material>
+    </gazebo>
+    <!-- ////////////////////////////////////////////////////////////////////////////// -->
+    <!-- RIGHT GRIPPER AFTER LINK -->
+    <link name="gripper_finger_link2">
+        <visual>
+            <origin rpy="0 1.570795 0" xyz="0 0 0" />
+            <geometry>
+                <box size="0.08 0.01 0.01" />
+            </geometry>
+            <material name="Red">
+                <color rgba="1.0 0.0 0.0 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin rpy="0 1.570795 0" xyz="0 0 0" />
+            <geometry>
+                <box size="0.08 0.01 0.01" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1" />
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="0.5" iyz="0.0" izz="1.0" />
+        </inertial>
+    </link>
+    <gazebo reference="gripper_finger_link2">
+        <material>Gazebo/Red</material>
+    </gazebo>
+    <!-- ////////////////////////////////////////////////////////////////////////////// -->
+    <!-- Transmissions for ROS Control -->
+    <transmission name="trans_shoulder_roll_joint">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="shoulder_roll_joint">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="shoulder_roll_joint_motor">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_shoulder_pitch_joint">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="shoulder_pitch_joint">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="shoulder_pitch_joint_motor">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_elbow_roll_joint">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="elbow_roll_joint">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="elbow_roll_joint_motor">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_elbow_pitch_joint">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="elbow_pitch_joint">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="elbow_pitch_joint_motor">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_wrist_roll_joint">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="wrist_roll_joint">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="wrist_roll_joint_motor">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_wrist_pitch_joint">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="wrist_pitch_joint">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="wrist_pitch_joint_motor">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <!-- ros_control plugin -->
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/six_dof_arm</robotNamespace>
+            <legacyModeNS>true</legacyModeNS>
+        </plugin>
+    </gazebo>
+</robot>

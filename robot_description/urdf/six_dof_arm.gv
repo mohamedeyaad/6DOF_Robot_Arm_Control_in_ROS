@@ -1,0 +1,35 @@
+digraph G {
+node [shape=box];
+"ground" [label="ground"];
+"base_link" [label="base_link"];
+"shoulder_roll_link" [label="shoulder_roll_link"];
+"shoulder_pitch_link" [label="shoulder_pitch_link"];
+"elbow_roll_link" [label="elbow_roll_link"];
+"elbow_pitch_link" [label="elbow_pitch_link"];
+"wrist_roll_link" [label="wrist_roll_link"];
+"wrist_pitch_link" [label="wrist_pitch_link"];
+"gripper_link" [label="gripper_link"];
+"gripper_finger_link1" [label="gripper_finger_link1"];
+"gripper_finger_link2" [label="gripper_finger_link2"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"ground" -> "ground_joint" [label="xyz: 0 0 0.06 \nrpy: 0 -0 0"]
+"ground_joint" -> "base_link"
+"base_link" -> "shoulder_roll_joint" [label="xyz: 0 0 0.07 \nrpy: 0 -0 0"]
+"shoulder_roll_joint" -> "shoulder_roll_link"
+"shoulder_roll_link" -> "shoulder_pitch_joint" [label="xyz: 0 0 0.02 \nrpy: 0 -0 0"]
+"shoulder_pitch_joint" -> "shoulder_pitch_link"
+"shoulder_pitch_link" -> "elbow_roll_joint" [label="xyz: 0 0 0.17 \nrpy: 0 -0 0"]
+"elbow_roll_joint" -> "elbow_roll_link"
+"elbow_roll_link" -> "elbow_pitch_joint" [label="xyz: 0 0 0.03 \nrpy: 0 -0 0"]
+"elbow_pitch_joint" -> "elbow_pitch_link"
+"elbow_pitch_link" -> "wrist_roll_joint" [label="xyz: 0 0 0.25 \nrpy: 0 -0 0"]
+"wrist_roll_joint" -> "wrist_roll_link"
+"wrist_roll_link" -> "wrist_pitch_joint" [label="xyz: 0 0 0.03 \nrpy: 0 -0 0"]
+"wrist_pitch_joint" -> "wrist_pitch_link"
+"wrist_pitch_link" -> "gripper_joint" [label="xyz: 0 0 0.07 \nrpy: 0 -0 0"]
+"gripper_joint" -> "gripper_link"
+"gripper_link" -> "finger_joint1" [label="xyz: 0 0.02 0.03 \nrpy: 0 -0 0"]
+"finger_joint1" -> "gripper_finger_link1"
+"gripper_link" -> "finger_joint2" [label="xyz: 0 -0.02 0.03 \nrpy: 0 -0 0"]
+"finger_joint2" -> "gripper_finger_link2"
+}
